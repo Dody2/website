@@ -1,0 +1,136 @@
+{
+  "expense_categories": [
+    "Housing & Utilities",
+    "Transportation",
+    "Food & Dining",
+    "Healthcare",
+    "Entertainment",
+    "Shopping",
+    "Travel",
+    "Business Expenses",
+    "Insurance",
+    "Investment",
+    "Savings",
+    "Taxes",
+    "Miscellaneous"
+  ],
+  "income_categories": [
+    "Salary",
+    "Business Income",
+    "Investment Returns",
+    "Freelance Work",
+    "Rental Income",
+    "Other Income"
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "name": "Checking Account",
+      "type": "Personal",
+      "balance": 5420.5
+    },
+    {
+      "id": 2,
+      "name": "Business Account",
+      "type": "Business",
+      "balance": 12850.75
+    },
+    {
+      "id": 3,
+      "name": "Savings Account",
+      "type": "Personal",
+      "balance": 25600.0
+    },
+    {
+      "id": 4,
+      "name": "Investment Account",
+      "type": "Personal",
+      "balance": 48200.25
+    }
+  ],
+  "sample_transactions": [
+    {
+      "id": 1,
+      "date": "2025-06-10",
+      "description": "Grocery Shopping",
+      "category": "Food & Dining",
+      "amount": -145.67,
+      "type": "Personal",
+      "account": "Checking Account"
+    },
+    {
+      "id": 2,
+      "date": "2025-06-09",
+      "description": "Salary Deposit",
+      "category": "Salary",
+      "amount": 3500.0,
+      "type": "Personal",
+      "account": "Checking Account"
+    },
+    {
+      "id": 3,
+      "date": "2025-06-08",
+      "description": "Office Supplies",
+      "category": "Business Expenses",
+      "amount": -287.45,
+      "type": "Business",
+      "account": "Business Account"
+    },
+    {
+      "id": 4,
+      "date": "2025-06-07",
+      "description": "Gas Station",
+      "category": "Transportation",
+      "amount": -65.2,
+      "type": "Personal",
+      "account": "Checking Account"
+    },
+    {
+      "id": 5,
+      "date": "2025-06-06",
+      "description": "Client Payment",
+      "category": "Business Income",
+      "amount": 2500.0,
+      "type": "Business",
+      "account": "Business Account"
+    }
+  ],
+  "budgets": [
+    {
+      "category": "Food & Dining",
+      "budgeted": 600,
+      "spent": 432.5,
+      "remaining": 167.5
+    },
+    {
+      "category": "Transportation",
+      "budgeted": 400,
+      "spent": 285.3,
+      "remaining": 114.7
+    },
+    {
+      "category": "Entertainment",
+      "budgeted": 200,
+      "spent": 150.0,
+      "remaining": 50.0
+    },
+    {
+      "category": "Business Expenses",
+      "budgeted": 1500,
+      "spent": 987.2,
+      "remaining": 512.8
+    },
+    {
+      "category": "Housing & Utilities",
+      "budgeted": 1200,
+      "spent": 1200.0,
+      "remaining": 0.0
+    }
+  ],
+  "monthly_summary": {
+    "total_income": 6000.0,
+    "total_expenses": 2870.32,
+    "net_income": 3129.68,
+    "savings_rate": 0.52
+  }
+}

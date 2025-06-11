@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Manager Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <div class="nav-brand">
+                <h1>Finance Manager Pro</h1>
+            </div>
+            <div class="nav-controls">
+                <button class="btn btn--sm" id="theme-toggle">🌙</button>
+                <button class="btn btn--primary btn--sm" id="add-transaction-btn">+ Add Transaction</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="dashboard" class="section active">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Dashboard</h2>
+                        <div class="quick-actions">
+                            <button class="btn btn--sm btn--secondary" id="export-data-btn">📊 Export Data</button>
+                        </div>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="summary-grid">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Total Balance</h3>
+                                <div class="metric-value" id="total-balance">$0.00</div>
+                                <div class="metric-change positive" id="balance-change">+0.00%</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Monthly Income</h3>
+                                <div class="metric-value" id="monthly-income">$0.00</div>
+                                <div class="metric-change positive" id="income-change">+0.00%</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Monthly Expenses</h3>
+                                <div class="metric-value" id="monthly-expenses">$0.00</div>
+                                <div class="metric-change negative" id="expenses-change">-0.00%</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Savings Rate</h3>
+                                <div class="metric-value" id="savings-rate">0%</div>
+                                <div class="metric-change positive" id="savings-change">+0.00%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="charts-grid">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Income vs Expenses Trend</h3>
+                                <div class="chart-container">
+                                    <canvas id="income-expenses-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Budget vs Actual</h3>
+                                <div class="chart-container">
+                                    <canvas id="budget-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Transactions -->
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="flex justify-between items-center mb-16">
+                                <h3>Recent Transactions</h3>
+                                <button class="btn btn--sm btn--outline" id="view-all-transactions">View All</button>
+                            </div>
+                            <div class="transactions-list" id="recent-transactions">
+                                <!-- Recent transactions will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions -->
+            <section id="transactions" class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Transactions</h2>
+                        <button class="btn btn--primary" id="add-transaction-btn-2">+ Add Transaction</button>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="card mb-16">
+                        <div class="card__body">
+                            <div class="filters-grid">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="search-transactions" placeholder="Search transactions...">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="filter-category">
+                                        <option value="">All Categories</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="filter-account">
+                                        <option value="">All Accounts</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="filter-type">
+                                        <option value="">All Types</option>
+                                        <option value="Personal">Personal</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transactions List -->
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="transactions-table" id="transactions-table">
+                                <!-- Transactions table will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budgets -->
+            <section id="budgets" class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Budget Management</h2>
+                        <button class="btn btn--primary" id="add-budget-btn">+ Add Budget</button>
+                    </div>
+
+                    <div class="budgets-grid" id="budgets-grid">
+                        <!-- Budget cards will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accounts -->
+            <section id="accounts" class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Account Management</h2>
+                        <button class="btn btn--primary" id="add-account-btn">+ Add Account</button>
+                    </div>
+
+                    <div class="accounts-grid" id="accounts-grid">
+                        <!-- Account cards will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports -->
+            <section id="reports" class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Financial Reports</h2>
+                    </div>
+
+                    <div class="reports-grid">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Export Options</h3>
+                                <div class="export-buttons">
+                                    <button class="btn btn--outline" id="export-transactions">Export Transactions</button>
+                                    <button class="btn btn--outline" id="export-budgets">Export Budgets</button>
+                                    <button class="btn btn--outline" id="export-accounts">Export Accounts</button>
+                                    <button class="btn btn--outline" id="export-summary">Export Summary</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>Expense Breakdown</h3>
+                                <div class="chart-container">
+                                    <canvas id="expense-breakdown-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-section="dashboard">
+                <span>📊</span>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-item" data-section="transactions">
+                <span>💳</span>
+                <span>Transactions</span>
+            </button>
+            <button class="nav-item" data-section="budgets">
+                <span>🎯</span>
+                <span>Budgets</span>
+            </button>
+            <button class="nav-item" data-section="accounts">
+                <span>🏦</span>
+                <span>Accounts</span>
+            </button>
+            <button class="nav-item" data-section="reports">
+                <span>📈</span>
+                <span>Reports</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Transaction Modal -->
+    <div class="modal" id="transaction-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="transaction-modal-title">Add Transaction</h3>
+                <button class="modal-close" id="close-transaction-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="transaction-form">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" id="transaction-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <input type="text" class="form-control" id="transaction-description" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" id="transaction-category" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="transaction-amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <select class="form-control" id="transaction-type" required>
+                            <option value="">Select Type</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Account</label>
+                        <select class="form-control" id="transaction-account" required>
+                            <option value="">Select Account</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Transaction Direction</label>
+                        <select class="form-control" id="transaction-direction" required>
+                            <option value="expense">Expense (Outgoing)</option>
+                            <option value="income">Income (Incoming)</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn--outline" id="cancel-transaction">Cancel</button>
+                        <button type="submit" class="btn btn--primary">Save Transaction</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Budget Modal -->
+    <div class="modal" id="budget-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Budget</h3>
+                <button class="modal-close" id="close-budget-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="budget-form">
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" id="budget-category" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Monthly Budget Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="budget-amount" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn--outline" id="cancel-budget">Cancel</button>
+                        <button type="submit" class="btn btn--primary">Save Budget</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Account Modal -->
+    <div class="modal" id="account-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Account</h3>
+                <button class="modal-close" id="close-account-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="account-form">
+                    <div class="form-group">
+                        <label class="form-label">Account Name</label>
+                        <input type="text" class="form-control" id="account-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Account Type</label>
+                        <select class="form-control" id="account-type" required>
+                            <option value="">Select Type</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Initial Balance</label>
+                        <input type="number" step="0.01" class="form-control" id="account-balance" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn--outline" id="cancel-account">Cancel</button>
+                        <button type="submit" class="btn btn--primary">Save Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
